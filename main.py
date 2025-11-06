@@ -1,18 +1,19 @@
+import os
 import validators,streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from langchain.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import YoutubeLoader,UnstructuredURLLoader
+from dotenv import load_dotenv
+load_dotenv()
 
 # stream aap
 st.set_page_config(page_title="Langchain: Summarize Text from YT or website")
 st.title("Langchain: Summarize Text from YT or website")
 st.subheader('Summarize URl')
 
-
 # get the groq API key and url (yt and website) to be summarized
-with st.sidebar:
-    groq_api_key=st.text_input("Groq Api key",value="",type='password')
+groq_api_key=os.getenv('GROQ_API_KEY')
 
 llm=ChatGroq(model='llama-3.3-70b-versatile',groq_api_key=groq_api_key)
 
@@ -50,4 +51,5 @@ if st.button("summarization the content from YT or website"):
 
                 st.success(output_summary)
         except Exception as e:
+
             st.exception(f"Exception:{e}")
