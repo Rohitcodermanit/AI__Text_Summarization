@@ -1,11 +1,13 @@
 streamlit==1.38.0
 
+# LangChain ecosystem (COMPATIBLE)
 langchain==0.3.13
-langchain-core==0.3.29
+langchain-core==0.3.75
 langchain-community==0.3.13
 langchain-groq==0.3.8
 langsmith==0.1.125
 
+# Supporting Libraries
 python-dotenv==1.0.1
 validators==0.22.0
 youtube_transcript_api==0.6.2
@@ -13,12 +15,15 @@ unstructured==0.10.30
 requests==2.31.0
 beautifulsoup4==4.12.3
 
+# PDF / Web / Search
 pymupdf==1.24.9
 duckduckgo-search==5.3.1
 
+# Data / Vector DB
 pandas==2.2.2
 faiss-cpu==1.7.4
 chromadb==0.5.3
 
+# Embeddings / Models
 sentence-transformers==2.7.0
 langchain-huggingface==0.3.1
