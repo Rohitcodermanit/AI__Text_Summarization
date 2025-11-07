@@ -1,15 +1,13 @@
 streamlit==1.38.0
-
-langchain==0.2.12
-langchain-core==0.2.27
-langchain-community==0.2.10
-langchain-groq==0.1.10
-langsmith==0.1.90
+langchain==0.2.16
+langchain-core==0.2.39
+langchain-community==0.2.11
+langchain-groq==0.1.11
+langsmith==0.1.125
 
 python-dotenv==1.0.1
 validators==0.22.0
 youtube_transcript_api==0.6.2
-
 unstructured==0.10.30
 requests==2.31.0
 beautifulsoup4==4.12.3
