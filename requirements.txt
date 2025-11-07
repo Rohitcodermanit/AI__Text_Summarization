@@ -6,7 +6,7 @@ langchain_groq==0.1.4
 python-dotenv==1.0.1
 validators==0.22.0
 youtube_transcript_api==0.6.2
-unstructured==0.14.12
+unstructured==0.10.30
 requests==2.31.0
 beautifulsoup4==4.12.3
 pymupdf==1.24.9
