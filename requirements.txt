@@ -1,8 +1,9 @@
 streamlit==1.38.0
-langchain==0.2.12
-langchain-core==0.2.27
-langchain-community==0.2.10
-langchain_groq==0.1.4
+langchain==0.3.10
+langchain-core==0.3.16
+langchain-community==0.3.10
+langchain-groq==0.1.9
+langchain-huggingface==0.3.1
 python-dotenv==1.0.1
 validators==0.22.0
 youtube_transcript_api==0.6.2
@@ -15,4 +16,3 @@ pandas==2.2.2
 faiss-cpu==1.7.4
 chromadb==0.5.3
 sentence-transformers==2.7.0
-langchain-huggingface==0.3.1
