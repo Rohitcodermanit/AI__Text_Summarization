@@ -1,10 +1,12 @@
 streamlit==1.38.0
+
 langchain==0.3.13
 langchain-core==0.3.29
 langchain-community==0.3.13
 langsmith==0.1.90
-langchain-groq==0.4.0
+langchain-groq==0.3.8
 langchain-huggingface==0.3.1
+
 python-dotenv==1.0.1
 validators==0.22.0
 youtube_transcript_api==0.6.2
@@ -14,6 +16,7 @@ beautifulsoup4==4.12.3
 pymupdf==1.24.9
 duckduckgo-search==5.3.1
 pandas==2.2.2
+
 faiss-cpu==1.7.4
 chromadb==0.5.3
 sentence-transformers==2.7.0
