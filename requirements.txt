@@ -10,7 +10,7 @@ python-dotenv==1.0.1
 validators==0.22.0
 youtube_transcript_api==0.6.2
 unstructured==0.10.30
-requests==2.31.0
+requests>=2.32.2
 beautifulsoup4==4.12.3
 
 pymupdf==1.24.9
@@ -22,6 +22,5 @@ chromadb==0.5.3
 
 sentence-transformers==2.7.0
 langchain-huggingface==0.3.1
+
 yt-dlp==2024.10.22
-
-
