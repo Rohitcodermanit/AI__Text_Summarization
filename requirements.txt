@@ -22,4 +22,5 @@ chromadb==0.5.3
 
 sentence-transformers==2.7.0
 langchain-huggingface==0.3.1
-yt-dlp==2024.11.4
+yt-dlp==2025.02.04
+
