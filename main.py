@@ -64,24 +64,23 @@ def get_youtube_transcript(video_id):
     return None 
 
 def transcribe_audio_from_youtube(url):
-    # Create a secure temporary directory
-    temp_dir = tempfile.gettempdir()
-    audio_path = os.path.join(temp_dir, "audio.mp3")
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp:
+        audio_path = tmp.name
 
     ydl_opts = {
         "format": "bestaudio/best",
         "outtmpl": audio_path,
         "quiet": True,
+        "force_ipv4": True,
         "extractor_args": {
-            "youtube": ["player_client=android"]  # Important: Fixes YouTube extraction issue
+            "youtube": {"player_client": ["web"]}
         }
     }
 
-    # Download audio using yt-dlp
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-    # Send audio to Groq Whisper
     client = Groq(api_key=groq_api_key)
 
     with open(audio_path, "rb") as audio_file:
@@ -136,6 +135,7 @@ if st.button("Summarize"):
 
         except Exception as e:
             st.error(f"Error: {e}")
+
 
 
 
