@@ -63,20 +63,24 @@ def get_youtube_transcript(video_id):
     return None  # No transcript exists
 
 def transcribe_audio_from_youtube(url):
-    ydl_opts = {
-        "format": "bestaudio/best",
-        "outtmpl": "/mnt/data/audio.mp3",
-        "quiet": True,
-        "extractor_args": {
-            "youtube": {
-                "player_client": ["web"]
-            }
-        }
-    }
-    with YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
-
     client = Groq(api_key=groq_api_key)
+
+    # Try Android client first
+    for client_type in ["android", "web", "ios"]:
+        try:
+            ydl_opts = {
+                "format": "bestaudio/best",
+                "outtmpl": "/mnt/data/audio.mp3",
+                "quiet": True,
+                "extractor_args": {
+                    "youtube": [f"player_client={client_type}"]
+                }
+            }
+            with YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+            break
+        except Exception:
+            continue
 
     with open("/mnt/data/audio.mp3", "rb") as audio_file:
         transcript = client.audio.transcriptions.create(
@@ -129,4 +133,5 @@ if st.button("Summarize"):
 
         except Exception as e:
             st.error(f"Error: {e}")
+
 
