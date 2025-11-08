@@ -1,11 +1,11 @@
 streamlit==1.38.0
 
-# LangChain ecosystem (COMPATIBLE)
-langchain==0.3.13
+# LangChain ecosystem (COMPATIBLE & STABLE SET)
+langchain==0.3.18
 langchain-core==0.3.75
-langchain-community==0.3.13
+langchain-community==0.3.18
 langchain-groq==0.3.8
-langsmith==0.1.125
+langsmith==0.3.47
 
 # Supporting Libraries
 python-dotenv==1.0.1
