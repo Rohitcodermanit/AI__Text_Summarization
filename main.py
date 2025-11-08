@@ -9,6 +9,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from urllib.parse import urlparse, parse_qs
 from bs4 import BeautifulSoup
 import requests
+import tempfile
 from yt_dlp import YoutubeDL
 from groq import Groq 
 from dotenv import load_dotenv
@@ -60,34 +61,36 @@ def get_youtube_transcript(video_id):
     except:
         pass
 
-    return None  # No transcript exists
+    return None 
 
 def transcribe_audio_from_youtube(url):
+    # Create a secure temporary directory
+    temp_dir = tempfile.gettempdir()
+    audio_path = os.path.join(temp_dir, "audio.mp3")
+
+    ydl_opts = {
+        "format": "bestaudio/best",
+        "outtmpl": audio_path,
+        "quiet": True,
+        "extractor_args": {
+            "youtube": ["player_client=android"]  # Important: Fixes YouTube extraction issue
+        }
+    }
+
+    # Download audio using yt-dlp
+    with YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+
+    # Send audio to Groq Whisper
     client = Groq(api_key=groq_api_key)
 
-    # Try Android client first
-    for client_type in ["android", "web", "ios"]:
-        try:
-            ydl_opts = {
-                "format": "bestaudio/best",
-                "outtmpl": "/mnt/data/audio.mp3",
-                "quiet": True,
-                "extractor_args": {
-                    "youtube": [f"player_client={client_type}"]
-                }
-            }
-            with YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
-            break
-        except Exception:
-            continue
-
-    with open("/mnt/data/audio.mp3", "rb") as audio_file:
+    with open(audio_path, "rb") as audio_file:
         transcript = client.audio.transcriptions.create(
             file=audio_file,
             model="whisper-large-v3"
         )
-        return transcript.text
+
+    return transcript.text
         
 def get_website_text(url):
     try:
@@ -133,5 +136,6 @@ if st.button("Summarize"):
 
         except Exception as e:
             st.error(f"Error: {e}")
+
 
 
