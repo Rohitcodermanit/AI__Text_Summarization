@@ -66,20 +66,25 @@ def transcribe_audio_from_youtube(url):
     ydl_opts = {
         "format": "bestaudio/best",
         "outtmpl": "/mnt/data/audio.mp3",
-        "quiet": True
+        "quiet": True,
+        "extractor_args": {
+            "youtube": {
+                "player_client": ["web"]
+            }
+        }
     }
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-    client = Groq(api_key=groq_api_key)  
+    client = Groq(api_key=groq_api_key)
 
     with open("/mnt/data/audio.mp3", "rb") as audio_file:
         transcript = client.audio.transcriptions.create(
             file=audio_file,
             model="whisper-large-v3"
         )
-        return transcript.text 
-
+        return transcript.text
+        
 def get_website_text(url):
     try:
         loader = UnstructuredURLLoader(urls=[url], ssl_verify=True)
@@ -124,3 +129,4 @@ if st.button("Summarize"):
 
         except Exception as e:
             st.error(f"Error: {e}")
+
