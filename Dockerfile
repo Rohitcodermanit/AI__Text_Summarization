@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     poppler-utils \
     libglib2.0-0 \
+    ffmpeg \
     libgl1 \
     libmagic1 \
     && rm -rf /var/lib/apt/lists/*
