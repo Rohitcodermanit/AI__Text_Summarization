@@ -4,7 +4,7 @@ langchain==0.3.18
 langchain-core==0.3.75
 langchain-community==0.3.18
 langchain-groq==0.3.8
-langsmith==0.3.47
+langsmith==0.3.45   
 
 python-dotenv==1.0.1
 validators==0.22.0
